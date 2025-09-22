@@ -21,6 +21,7 @@ Cuando se ejecuta el script, va a leer en la carpeta de in los documentos uno po
 - Shortcut para invocar el programa para acceder rápidamente a las notas.
 - Poder encriptar notas.
 - Al abrir el programa que aparezca el número de notas creadas y número total de espacio.
+- Parsear una captura de pantalla sobre una nota y extraer el texto.
 
 ## Pendientes a decidir
 
