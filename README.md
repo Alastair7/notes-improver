@@ -10,13 +10,14 @@ Cuando se ejecuta el script, va a leer en la carpeta de in los documentos uno po
 
 ## TODO
 
-- Pensar en una manera de complicar el proyecto.
+- Terminar de escribir los tests para la función get_files_with_text
 
 ## Propuestas
 
 - Generar un index.md como resumen de cada nota: fecha de creación, título y un resumen en 2 lineas.
 - Sincronizar notas con Obsidian, o poder sincronizarlas con alguna otra app para tenerlas disponibles siempre.
 - Búsqueda de notas por keyword: A partir de keywords, devolver las notas que los incluyan.
+- Búsqueda por tags.
 - Notas temporales: Poder marcar una nota como temporal y que se borre al cabo de x tiempo.
 - Shortcut para invocar el programa para acceder rápidamente a las notas.
 - Poder encriptar notas.
