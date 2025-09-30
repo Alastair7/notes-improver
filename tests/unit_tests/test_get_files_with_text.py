@@ -22,13 +22,14 @@ def test_get_files_with_text_without_matches(init_data_folder: Path):
 
     assert result == []
 
+
 def test_get_files_with_text_with_matches(init_data_folder: Path):
     result = get_files_with_text(init_data_folder, "text")
 
     assert set(result) == {init_data_folder / "1.md", init_data_folder / "2.md"}
 
+
 def test_get_files_with_text_search_only_md_filetypes(init_data_folder: Path):
     result = get_files_with_text(init_data_folder, "text")
 
-    assert "4.txt" not in set(result) 
-
+    assert "4.txt" not in result
