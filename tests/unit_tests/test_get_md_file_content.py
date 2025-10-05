@@ -10,15 +10,18 @@ from utils.files import get_md_file_content
 def init_data_folder(tmp_path: Path) -> Path:
     md_structure = dedent("""\
     ---
-    keywords:
-    - hola
-    - mundo
+    keywords: [hola, mundo]
     ---
 
     # Title
      """)
 
+    md_no_keywords_with_content = dedent("""\
+            # Title
+            """)
+
     (tmp_path / "1.md").write_text(md_structure)
+    (tmp_path / "2.md").write_text(md_no_keywords_with_content)
 
     (tmp_path / "empty.md").write_text("")
 
@@ -33,16 +36,24 @@ def test_get_md_file_content_empty_text_should_not_have_keywords_nor_text(
     assert result.keywords == set()
     assert result.text == ""
 
+def test_get_md_file_content_when_no_keywords_should_return_empty_keywords_and_existing_content(init_data_folder: Path):
+    file_path = init_data_folder / "2.md"
 
-# def test_get_md_file_content_show_keywrods(init_data_folder: Path):
-#     content = (init_data_folder / "1.md").read_text()
-#     file_path = init_data_folder / "1.md"
+    result = get_md_file_content(file_path)
 
-#     print(content)
+    assert result.keywords == set()
+    assert result.text == "# Title"
 
-#     result = get_md_file_content(file_path)
+def test_get_md_file_content_should_show_keywrods(init_data_folder: Path):
+    file_path = init_data_folder / "1.md"
 
-#     assert result.keywords == ["hola", "mundo"]
-#     assert result.text == "# Title"
+    result = get_md_file_content(file_path)
 
-#     assert 0
+    assert result.keywords == ["hola", "mundo"]
+
+def test_get_md_file_content_should_show_content(init_data_folder: Path):
+    file_path = init_data_folder / "1.md"
+
+    result = get_md_file_content(file_path)
+
+    assert result.text == "# Title"

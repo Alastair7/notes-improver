@@ -5,7 +5,10 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "markdown-full-yaml-metadata>=2.2.1",
     "openai>=1.107.3",
+    "python-frontmatter>=1.1.0",
+    "python-markdown>=0.1.0",
 ]
 
 [dependency-groups]
