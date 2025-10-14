@@ -1,5 +1,7 @@
 from dataclasses import dataclass
 from pathlib import Path
+from typing import cast
+
 import frontmatter
 
 
@@ -14,14 +16,18 @@ def get_files_with_text(path: Path, text: str) -> list[Path]:
 
 
 def get_md_file_content(path: Path) -> Note:
-    note = Note(keywords=set(), text="")
     content = path.read_text()
 
-    if content == "":
-        return note
+    text = frontmatter.loads(content)
+    keywords = cast(list[str], text.metadata.get("keywords", []))
 
-    # DUDA: Es posible añadirle un tipado a text.metadata[key]?
-    text = frontmatter.loads(content) 
-    keywords = text.metadata.get("keywords", set())
+    return Note(keywords=set(keywords), text=text.content)
 
-    return Note(keywords=keywords,text=text.content)
+
+def search_files_with_keywords(path: Path, keywords: list[str]) -> list[Path]:
+    def note_has_keywords(keywords: list[str], file: Path):
+        return set(keywords) & get_md_file_content(file).keywords
+
+    return [
+        file for file in path.glob(pattern="*.md") if note_has_keywords(keywords, file)
+    ]

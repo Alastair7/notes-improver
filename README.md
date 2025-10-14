@@ -10,6 +10,12 @@ Cuando se ejecuta el script, va a leer en la carpeta de in los documentos uno po
 
 ## TODO
 
+- [] Terminar de escribir los tests de `search_files_with_keywords` utilizando TDD
+- [] Pensar y decidir cómo se van a utilizar las piezas en el proyecto
+- [] Investigar `click` para comandos CLI
+
+
+PREV
 - [x] Revisar librerías `markdown-full-yaml-metadata` y `python-frontmatter` y decidir cuál utilizar
 - [x] Añadir la lógica de `get_md_file_content` utilizando TDD.
 
