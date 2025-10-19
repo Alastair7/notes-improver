@@ -8,11 +8,22 @@ Una carpeta de in donde contendrá ficheros txt y otra carpeta out con los docum
 
 Cuando se ejecuta el script, va a leer en la carpeta de in los documentos uno por uno, y los va a mandar en los procesos de IA y el resultado se guardará en la carpeta out con el mismo nombre y extensión md.
 
+## CLI
+Varios comandos donde cada uno tendrá sus subcomandos que permitirán hacer ciertas acciones como por ejemplo:
+
+`notes sync`: Ejecuta el script para convertir los ficheros de `in/` a `out/` en formato .md y mejorados por la IA.
+
+`notes search 'Text to find in any note'` esto devolvería el listado de ficheros donde se encuentra el texto.
+
+`notes keywords`: Devuelve el contenido de los ficheros donde coincidan sus keywords.
+
+`notes get --path`: Devuelve el contenido del fichero indicado. 
+
 ## TODO
 
-- [] Terminar de escribir los tests de `search_files_with_keywords` utilizando TDD
-- [] Pensar y decidir cómo se van a utilizar las piezas en el proyecto
-- [] Investigar `click` para comandos CLI
+- [x] Terminar de escribir los tests de `search_files_with_keywords` utilizando TDD
+- [x] Pensar y decidir cómo se van a utilizar las piezas en el proyecto
+- [x] Investigar `click` para comandos CLI
 
 
 PREV
@@ -35,3 +46,4 @@ PREV
 
 - Cómo va a ser el flujo de los archivos
 - Con qué IA vamos a hablar?
+- Cómo se van a utilizar las piezas en el proyecto?
