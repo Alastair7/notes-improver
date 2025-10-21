@@ -8,6 +8,7 @@ dependencies = [
     "click>=8.3.0",
     "markdown-full-yaml-metadata>=2.2.1",
     "openai>=1.107.3",
+    "peek-python>=25.0.24",
     "python-frontmatter>=1.1.0",
     "python-markdown>=0.1.0",
 ]

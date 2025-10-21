@@ -21,9 +21,9 @@ Varios comandos donde cada uno tendrá sus subcomandos que permitirán hacer cie
 
 ## TODO
 
-- [x] Terminar de escribir los tests de `search_files_with_keywords` utilizando TDD
-- [x] Pensar y decidir cómo se van a utilizar las piezas en el proyecto
-- [x] Investigar `click` para comandos CLI
+- [] Crear función de utilidad para buscar mediante configuración la carpeta de las notas
+- [] Decidir cómo hacer el sistema de ficheros
+- [] Adaptar el test de search_notes_by_text para llamar a la función directamente sin pasar por click. 
 
 
 PREV
