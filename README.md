@@ -9,6 +9,9 @@ Una carpeta de in donde contendrá ficheros txt y otra carpeta out con los docum
 Cuando se ejecuta el script, va a leer en la carpeta de in los documentos uno por uno, y los va a mandar en los procesos de IA y el resultado se guardará en la carpeta out con el mismo nombre y extensión md.
 
 ## CLI
+
+**Es necesario declarar la variable de entorno: `export NOTES_DIR=$HOME/notes/`**
+
 Varios comandos donde cada uno tendrá sus subcomandos que permitirán hacer ciertas acciones como por ejemplo:
 
 `notes sync`: Ejecuta el script para convertir los ficheros de `in/` a `out/` en formato .md y mejorados por la IA.
@@ -19,10 +22,15 @@ Varios comandos donde cada uno tendrá sus subcomandos que permitirán hacer cie
 
 `notes get --path`: Devuelve el contenido del fichero indicado. 
 
+## Sistema de ficheros
+
+ En la carpeta HOME del usuario, existirá la carpeta `notes/in` para añadir ficheros .txt.
+ La carpeta `notes/out` contendrá las notas ya parseadas y esta carpeta estará registrada mediante variable de entorno.
+
 ## TODO
 
-- [] Crear función de utilidad para buscar mediante configuración la carpeta de las notas
-- [] Decidir cómo hacer el sistema de ficheros
+- [x] Crear función de utilidad para buscar mediante configuración la carpeta de las notas
+- [x] Decidir cómo hacer el sistema de ficheros
 - [x] Adaptar el test de search_notes_by_text para llamar a la función directamente sin pasar por click. 
 
 
