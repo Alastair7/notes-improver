@@ -28,10 +28,9 @@ Varios comandos donde cada uno tendrá sus subcomandos que permitirán hacer cie
  La carpeta `notes/out` contendrá las notas ya parseadas y esta carpeta estará registrada mediante variable de entorno.
 
 ## TODO
-
-- [x] Crear función de utilidad para buscar mediante configuración la carpeta de las notas
-- [x] Decidir cómo hacer el sistema de ficheros
-- [x] Adaptar el test de search_notes_by_text para llamar a la función directamente sin pasar por click. 
+- [x] Reconfigurar el sistema de ficheros para que solo haya in, y los MD estén en la carpeta raíz: notes/
+- [] Corregir test para que revise dentro de las carpetas si existen textos.
+- [] Leer capítulo 7 de Fluent Python
 
 
 PREV

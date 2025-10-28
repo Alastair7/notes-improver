@@ -7,6 +7,10 @@ from utils.files import get_files_with_text
 
 @pytest.fixture
 def init_data_folder(tmp_path: Path) -> Path:
+    help_dir = tmp_path / "help"
+    help_dir.mkdir(parents=True, exist_ok=True)
+
+    (help_dir / "helper.md").write_text("# Help Me\nHelp note")
     (tmp_path / "1.md").write_text("# Title\nSome text here.")
     (tmp_path / "2.md").write_text("Just some text.")
     (tmp_path / "3.md").write_text("Another markdown file.")
@@ -33,3 +37,9 @@ def test_get_files_with_text_search_only_md_filetypes(init_data_folder: Path):
     result = get_files_with_text(init_data_folder, "text")
 
     assert "4.txt" not in result
+
+
+def test_get_files_with_text_search_notes_in_folders(init_data_folder: Path):
+    result = get_files_with_text(init_data_folder, "Help")
+
+    assert init_data_folder / "help/helper.md" in result

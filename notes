@@ -1,0 +1,4 @@
+#! /bin/bash
+
+cd $HOME/development/notes-improver
+uv run notes.py "$@"

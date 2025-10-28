@@ -12,7 +12,7 @@ class Note:
 
 
 def get_files_with_text(path: Path, text: str) -> list[Path]:
-    return [file for file in path.glob("*.md") if text in file.read_text()]
+    return [file for file in path.rglob("*.md") if text in file.read_text()]
 
 
 def get_md_file_content(path: Path) -> Note:
