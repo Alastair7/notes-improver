@@ -29,7 +29,7 @@ Varios comandos donde cada uno tendrá sus subcomandos que permitirán hacer cie
 
 ## TODO
 - [x] Reconfigurar el sistema de ficheros para que solo haya in, y los MD estén en la carpeta raíz: notes/
-- [] Corregir test para que revise dentro de las carpetas si existen textos.
+- [x] Corregir test para que revise dentro de las carpetas si existen textos.
 - [] Leer capítulo 7 de Fluent Python
 
 
@@ -41,10 +41,10 @@ PREV
 
 - Generar un index.md como resumen de cada nota: fecha de creación, título y un resumen en 2 lineas.
 - Sincronizar notas con Obsidian, o poder sincronizarlas con alguna otra app para tenerlas disponibles siempre.
-- (WIP) Búsqueda de notas por keyword: A partir de keywords, devolver las notas que los incluyan.
+- [x] Búsqueda de notas por keyword: A partir de keywords, devolver las notas que los incluyan.
 - Búsqueda por tags.
 - Notas temporales: Poder marcar una nota como temporal y que se borre al cabo de x tiempo.
-- Shortcut para invocar el programa para acceder rápidamente a las notas.
+- [x] Shortcut para invocar el programa para acceder rápidamente a las notas.
 - Poder encriptar notas.
 - Al abrir el programa que aparezca el número de notas creadas y número total de espacio.
 - Parsear una captura de pantalla sobre una nota y extraer el texto.

@@ -43,9 +43,9 @@ def test_search_notes_by_text_should_return_notes_that_contains_the_text(
     assert result == "note_with_matching_text.md"
 
 
-def test_serach_notes_by_text_should_return_note_if_it_is_in_a_folder(
+def test_search_notes_by_text_should_return_note_if_it_is_in_a_folder(
     init_test_data_folder: Path,
 ):
-    result = _search_notes_by_text("Hello Helper", init_test_data_folder)
+    result = _search_notes_by_text("Hello helper", init_test_data_folder)
 
     assert "help/helper.md" == result

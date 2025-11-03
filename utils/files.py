@@ -29,5 +29,5 @@ def search_files_with_keywords(path: Path, keywords: list[str]) -> list[Path]:
         return set(keywords) & get_md_file_content(file).keywords
 
     return [
-        file for file in path.glob(pattern="*.md") if note_has_keywords(keywords, file)
+        file for file in path.rglob(pattern="*.md") if note_has_keywords(keywords, file)
     ]
