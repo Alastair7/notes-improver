@@ -2,7 +2,6 @@ from pathlib import Path
 
 import click
 
-# from peek import peek
 from utils.config import get_notes_dir
 from utils.files import get_files_with_text, search_files_with_keywords
 
