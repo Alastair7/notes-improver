@@ -22,7 +22,7 @@ Varios comandos donde cada uno tendrá sus subcomandos que permitirán hacer cie
 ## Sistema de ficheros
 
 - **'~/notes/'**: Esta carpeta debe existir en el PATH con la variable de entorno `NOTES_DIR`. Contiene las notas en formato `.md` ya parseadas.
-- **'~/notes/in/'**: La carpeta `in` contiene las notas en formato .txt pendientes de ser parseadas.
+- **'~/notes/in/'**: Contiene las notas en formato .txt pendientes de ser parseadas.
 
 ## TODO
 
