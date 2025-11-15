@@ -30,7 +30,7 @@ Varios comandos donde cada uno tendrá sus subcomandos que permitirán hacer cie
 - [] 
 - [x] Reconfigurar el sistema de ficheros para que solo haya in, y los MD estén en la carpeta raíz: notes/
 - [x] Corregir test para que revise dentro de las carpetas si existen textos.
-- [] Leer capítulo 7 de Fluent Python
+- [x] Leer capítulo 7 de Fluent Python
 
 
 ## Propuestas

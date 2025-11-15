@@ -10,6 +10,11 @@ class Note:
     keywords: set[str]
     text: str
 
+def get_files_to_parse(path: Path) -> list[Path]:
+    txt_files = [file for file in path.rglob("*.txt") if file.stat().st_size > 0]
+    md_files = [file.stem for file in path.rglob("*.md")]
+
+    return [file for file in txt_files if file.stem not in md_files]
 
 def get_files_with_text(path: Path, text: str) -> list[Path]:
     return [file for file in path.rglob("*.md") if text in file.read_text()]
