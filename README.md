@@ -37,8 +37,7 @@ Contenido
 
 ## TODO
 
-- [] Implementar comando `notes sync` para convertir ficheros .txt a MD usando el LLM de Gemini.
-- [] 
+- [x] Implementar comando `notes sync` para convertir ficheros .txt a MD usando el LLM de Gemini.
 - [x] Reconfigurar el sistema de ficheros para que solo haya in, y los MD estén en la carpeta raíz: notes/
 - [x] Corregir test para que revise dentro de las carpetas si existen textos.
 - [x] Leer capítulo 7 de Fluent Python
@@ -55,5 +54,6 @@ Contenido
 
 ## Pendientes a decidir
 
-- [] Crear un comando para parsear documentos .txt a markdown o utilizar la carpeta `in`?
+- [x] Crear un comando para parsear documentos .txt a markdown o utilizar la carpeta `in`?
+    - He decidido que no crearé la carpeta `in` y buscaré ficheros `.txt` en la carpeta de notas.
 - [] El comando `notes get` es necesario existiendo el comando de Linux `cat`?
