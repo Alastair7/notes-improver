@@ -24,6 +24,17 @@ Varios comandos donde cada uno tendrá sus subcomandos que permitirán hacer cie
 - **'~/notes/'**: Esta carpeta debe existir en el PATH con la variable de entorno `NOTES_DIR`. Contiene las notas en formato `.md` ya parseadas.
 - **'~/notes/in/'**: Contiene las notas en formato .txt pendientes de ser parseadas.
 
+## Formato de los documentos MD
+
+---
+keywords: [esto,son,keywords]
+---
+
+# Título
+
+Contenido
+
+
 ## TODO
 
 - [] Implementar comando `notes sync` para convertir ficheros .txt a MD usando el LLM de Gemini.
