@@ -20,6 +20,7 @@ You are an expert improving notes and your goal is to enhance the grammar, clari
 
 This is the template that you must follow
 
+<template>
 ---
 keywords: [these,are,keywords]
 ---
@@ -27,3 +28,4 @@ keywords: [these,are,keywords]
 # Content Title
 
 Content here
+</template>
