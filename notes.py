@@ -6,10 +6,15 @@ import click
 from openai import OpenAI
 
 from utils.config import get_notes_dir
-from utils.files import get_files_to_parse, get_files_with_text, search_files_with_keywords
+from utils.files import (
+    get_files_to_parse,
+    get_files_with_text,
+    search_files_with_keywords,
+)
 from utils.llm import GeminiLlm, LlmBase, parse_files
 
 load_dotenv()
+
 
 @click.group()
 def main():
@@ -22,6 +27,7 @@ def search_notes_by_text(text: str):
     notes_dir = get_notes_dir()
     click.echo(_search_notes_by_text(text, notes_dir))
 
+
 @main.command("search-by-keywords")
 @click.argument("keywords")
 def search_notes_by_keywords(keywords: str):
@@ -30,14 +36,18 @@ def search_notes_by_keywords(keywords: str):
     keywords_list = keywords.split(",")
     click.echo(_search_notes_by_keywords(keywords_list, notes_dir))
 
+
 @main.command("sync")
 def sync_notes():
     notes_dir = get_notes_dir()
 
-    client = OpenAI(base_url=os.getenv("GEMINI_BASE_URL"), api_key=os.getenv("GEMINI_API_KEY"))
+    client = OpenAI(
+        base_url=os.getenv("GEMINI_BASE_URL"), api_key=os.getenv("GEMINI_API_KEY")
+    )
     llm = GeminiLlm(client)
 
     click.echo(_sync_notes(llm=llm, notes_dir=notes_dir))
+
 
 def _sync_notes(llm: LlmBase, notes_dir: Path) -> str:
     files_to_parse = get_files_to_parse(notes_dir)
@@ -49,6 +59,7 @@ def _sync_notes(llm: LlmBase, notes_dir: Path) -> str:
 
     return "All existing .txt in notes_dir where parsed successfully"
 
+
 def _search_notes_by_text(text: str, notes_dir: Path):
     matching_files = get_files_with_text(notes_dir, text)
 
@@ -58,6 +69,7 @@ def _search_notes_by_text(text: str, notes_dir: Path):
     result = [note.relative_to(notes_dir).as_posix() for note in matching_files]
 
     return "\n".join(result)
+
 
 def _search_notes_by_keywords(keywords: list[str], notes_dir: Path):
     matching_files = search_files_with_keywords(notes_dir, keywords)

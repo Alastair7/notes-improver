@@ -4,7 +4,7 @@ Convierte documentos txt a markdown y luego se mejora el formato utilizando IA g
 
 ## Cómo funciona?
 
-Una carpeta de in donde contendrá ficheros txt y en la carpeta raíz estarán los documentos formateados y mejorados en md.
+Una carpeta `notes` contiene ficheros txt que se formatean utilizando un modelo de IA y se mejoran en formato `.md`.
 
 Cuando se ejecuta `notes sync`, va a leer en la carpeta de in los documentos uno por uno, luego un LLM va a mejorar el contenido y se guardará en formato `.md` en la carpeta raíz del proyecto
 
@@ -22,7 +22,6 @@ Varios comandos donde cada uno tendrá sus subcomandos que permitirán hacer cie
 ## Sistema de ficheros
 
 - **'~/notes/'**: Esta carpeta debe existir en el PATH con la variable de entorno `NOTES_DIR`. Contiene las notas en formato `.md` ya parseadas.
-- **'~/notes/in/'**: Contiene las notas en formato .txt pendientes de ser parseadas.
 
 ## Formato de los documentos MD
 
@@ -56,6 +55,3 @@ Contenido
 
 ## Pendientes a decidir
 
-- [x] Crear un comando para parsear documentos .txt a markdown o utilizar la carpeta `in`?
-    - He decidido que no crearé la carpeta `in` y buscaré ficheros `.txt` en la carpeta de notas.
-- [] El comando `notes get` es necesario existiendo el comando de Linux `cat`?
