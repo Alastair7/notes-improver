@@ -7,6 +7,7 @@ requires-python = ">=3.13"
 dependencies = [
     "click>=8.3.0",
     "dotenv>=0.9.9",
+    "jinja2>=3.1.6",
     "markdown-full-yaml-metadata>=2.2.1",
     "openai>=1.107.3",
     "peek-python>=25.0.24",

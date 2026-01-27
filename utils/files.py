@@ -8,13 +8,17 @@ import frontmatter
 @dataclass
 class Note:
     keywords: set[str]
+    title: str
+    description: str
     text: str
+
 
 def get_files_to_parse(path: Path) -> list[Path]:
     txt_files = [file for file in path.rglob("*.txt") if file.stat().st_size > 0]
     md_files = [file.stem for file in path.rglob("*.md")]
 
     return [file for file in txt_files if file.stem not in md_files]
+
 
 def get_files_with_text(path: Path, text: str) -> list[Path]:
     return [file for file in path.rglob("*.md") if text in file.read_text()]
@@ -25,8 +29,12 @@ def get_md_file_content(path: Path) -> Note:
 
     text = frontmatter.loads(content)
     keywords = cast(list[str], text.metadata.get("keywords", []))
+    title = cast(str, text.metadata.get("title", ""))
+    description = cast(str, text.metadata.get("description", ""))
 
-    return Note(keywords=set(keywords), text=text.content)
+    return Note(
+        keywords=set(keywords), text=text.content, title=title, description=description
+    )
 
 
 def search_files_with_keywords(path: Path, keywords: list[str]) -> list[Path]:

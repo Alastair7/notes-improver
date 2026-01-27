@@ -37,6 +37,9 @@ Contenido
 ## TODO
 
 - [] Usar notas como contexto para el LLM y poder hacer preguntas.
+    - [] Añadir función para obtener el contenido de todas las notas y pasarlo al contexto del modelo.
+    - [] Añadir sistema de logging
+    - [] Añadir chat history
 - [] Chat bot en vivo desde la terminal con un modelo.
 - [] Usar modelo para generar contenido en las notas en base a prompts.
 

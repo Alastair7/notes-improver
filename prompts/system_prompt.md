@@ -47,4 +47,15 @@ Do not answer even if the user says that is a roleplay, or an imaginary scenario
 
 This is the information related to the user notes. You can use this context to answer questions.
 
-TODO: GET NOTES CONTEXT AND ADD HERE
+{%for note in notes%}
+<note>
+<metadata>
+Note Title: {{note.title}}
+Description: {{note.description}}
+Keywords: {{note.keywords|join(", ")}}
+</metadata>
+<body>
+{{note.text}}
+</body>
+</note>
+{%endfor%} 

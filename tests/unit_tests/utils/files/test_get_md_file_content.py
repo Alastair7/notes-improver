@@ -3,7 +3,7 @@ from textwrap import dedent
 
 import pytest
 
-from utils.files import get_md_file_content
+from utils.files import Note, get_md_file_content
 
 
 @pytest.fixture
@@ -11,6 +11,8 @@ def init_data_folder(tmp_path: Path) -> Path:
     md_structure = dedent("""\
     ---
     keywords: [hola, mundo]
+    title: This is the title in metadata
+    description: One liner description
     ---
 
     # Title
@@ -37,7 +39,7 @@ def test_get_md_file_content_empty_text_should_not_have_keywords_nor_text(
     assert result.text == ""
 
 
-def test_get_md_file_content_when_no_keywords_should_return_empty_keywords_and_existing_content(
+def test_get_md_file_content_when_no_keywords_should_return_empty_values_and_existing_content(
     init_data_folder: Path,
 ):
     file_path = init_data_folder / "2.md"
@@ -45,12 +47,16 @@ def test_get_md_file_content_when_no_keywords_should_return_empty_keywords_and_e
     result = get_md_file_content(file_path)
 
     assert result.keywords == set()
+    assert result.title == ""
+    assert result.description == ""
     assert result.text == "# Title"
 
 
-def test_get_md_file_content_should_show_keywrods(init_data_folder: Path):
+def test_get_md_file_content_should_show_metadata(init_data_folder: Path):
     file_path = init_data_folder / "1.md"
 
-    result = get_md_file_content(file_path)
+    result: Note = get_md_file_content(file_path)
 
     assert result.keywords == {"hola", "mundo"}
+    assert result.title == "This is the title in metadata"
+    assert result.description == "One liner description"
