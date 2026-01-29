@@ -11,7 +11,7 @@ def init_data_folder(tmp_path: Path) -> Path:
 
 
 class FakeLlm:
-    def invoke(self, query: str) -> str:
+    def invoke(self, query: str, system_prompt: str = "", **kwargs) -> str:
         return query
 
 

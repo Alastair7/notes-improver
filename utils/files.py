@@ -28,13 +28,19 @@ def get_md_file_content(path: Path) -> Note:
     content = path.read_text()
 
     text = frontmatter.loads(content)
-    keywords = cast(list[str], text.metadata.get("keywords", []))
     title = cast(str, text.metadata.get("title", ""))
     description = cast(str, text.metadata.get("description", ""))
+    keywords = cast(list[str], text.metadata.get("keywords", []))
 
     return Note(
         keywords=set(keywords), text=text.content, title=title, description=description
     )
+
+
+def get_all_md_files_content(path: Path) -> list[Note]:
+    md_files = [file for file in path.rglob("*.md") if file.stat().st_size > 0]
+
+    return [get_md_file_content(note) for note in md_files]
 
 
 def search_files_with_keywords(path: Path, keywords: list[str]) -> list[Path]:

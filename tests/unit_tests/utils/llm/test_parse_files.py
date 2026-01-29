@@ -1,10 +1,8 @@
-
 from dataclasses import dataclass
 from pathlib import Path
 from pytest import fixture
 
 from utils.llm import parse_files
-
 
 
 @fixture()
@@ -14,10 +12,12 @@ def init_data_folder(tmp_path: Path) -> Path:
 
     return tmp_path
 
+
 @dataclass()
-class FakeLlm():
-    def invoke(self, query: str) -> str:
+class FakeLlm:
+    def invoke(self, query: str, system_prompt: str = "", **kwargs) -> str:
         return query
+
 
 def test_parse_files_should_generate_markdown_files_when_parsed(init_data_folder: Path):
     llm = FakeLlm()
