@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+import logging
 from pathlib import Path
 from typing import Literal, Protocol, cast
 
@@ -8,6 +9,8 @@ from openai.types.chat import (
 
 from jinja2 import Template
 from openai import OpenAI
+
+logger = logging.getLogger(__name__)
 
 syncing_template = Path("./prompts/syncing_template.md").read_text(encoding="utf-8")
 system_prompt = Path("./prompts/system_prompt.md").read_text(encoding="utf-8")
@@ -40,7 +43,9 @@ class GeminiLlm:
         **kwargs,
     ) -> str:
         if query is None and messages is None:
-            raise ValueError("query or messages must be provided")
+            empty_input_message = "query or messages must be provided"
+            logger.error(empty_input_message)
+            raise ValueError(empty_input_message)
 
         chat_history: list[dict[str, str]] = []
         prompt = Template(system_prompt).render(**kwargs)
@@ -66,6 +71,7 @@ class GeminiLlm:
 def parse_files(llm: LlmBase, files_to_parse: list[Path]):
     for file in files_to_parse:
         print("Parsing file:", file.name)
+        logger.info("Parsing file: %s", file.name)
         raw_content = file.read_text(encoding="utf-8")
 
         improved_note = llm.invoke(
@@ -75,3 +81,5 @@ def parse_files(llm: LlmBase, files_to_parse: list[Path]):
 
         with md_file_path.open("w", encoding="utf-8") as f:
             f.write(improved_note)
+
+        logger.info("Parsing completed: %s", md_file_path)
