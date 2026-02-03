@@ -1,14 +1,13 @@
-from dataclasses import dataclass
 import logging
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Literal, Protocol, cast
 
+from jinja2 import Template
+from openai import OpenAI
 from openai.types.chat import (
     ChatCompletionMessageParam,
 )
-
-from jinja2 import Template
-from openai import OpenAI
 
 logger = logging.getLogger(__name__)
 
@@ -59,11 +58,13 @@ class GeminiLlm:
         elif query:
             chat_history.append({"role": "user", "content": query})
 
-        # Add logging system: LogGuru, StructuredLog, built-in logging.
         response = self.client.chat.completions.create(
             model="gemini-2.5-flash",
             messages=cast(list[ChatCompletionMessageParam], chat_history),
         )
+
+        logger.debug("Chat history: %s", chat_history)
+        logger.debug("LLM response: %s", response.choices[0].message.content)
 
         return response.choices[0].message.content or ""
 

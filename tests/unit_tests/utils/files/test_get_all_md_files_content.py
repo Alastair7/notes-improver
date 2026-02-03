@@ -3,7 +3,7 @@ from textwrap import dedent
 
 import pytest
 
-from utils.files import get_all_md_files_content
+from utils.files import Note, get_all_md_files_content
 
 
 @pytest.fixture
@@ -28,7 +28,7 @@ def init_data_folder(tmp_path: Path) -> Path:
 
 
 def test_get_all_md_files_content_empty_file_is_ignored(init_data_folder: Path):
-    notes = get_all_md_files_content(init_data_folder)
+    notes: list[Note] = get_all_md_files_content(init_data_folder)
 
     assert len(notes) == 2
 

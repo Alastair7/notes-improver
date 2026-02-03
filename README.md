@@ -36,7 +36,7 @@ Contenido
 
 ## TODO
 
-- [] Usar notas como contexto para el LLM y poder hacer preguntas.
+- [x] Usar notas como contexto para el LLM y poder hacer preguntas.
     - [x] Añadir función para obtener el contenido de todas las notas y pasarlo al contexto del modelo.
     - [x] Añadir sistema de logging
     - [x] Añadir chat history

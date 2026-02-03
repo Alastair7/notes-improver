@@ -22,11 +22,13 @@ logger = logging.getLogger(__name__)
 Path.mkdir(Path(".logs"), exist_ok=True)
 log_filename = f".logs/log_{datetime.date.today().isoformat()}.log"
 logging.basicConfig(
-    format="%(asctime)s [%(levelname)s] %(message)s",
+    format="%(asctime)s %(name)s [%(levelname)s] %(message)s",
     filename=log_filename,
     encoding="utf-8",
     level=logging.INFO,
 )
+
+logging.getLogger("httpx").setLevel(logging.ERROR)
 
 
 @click.group()
