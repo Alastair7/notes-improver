@@ -23,10 +23,7 @@ class Message:
 
 class LlmBase(Protocol):
     def invoke(
-        self,
-        query: str | None,
-        messages: list[Message] | None,
-        system_prompt: str = "",
+        self, query: str | None, messages: list[Message] | None, system_prompt: str = ""
     ) -> str: ...
 
 
@@ -47,9 +44,11 @@ class GeminiLlm:
             raise ValueError(empty_input_message)
 
         chat_history: list[dict[str, str]] = []
-        prompt = Template(system_prompt).render(**kwargs)
 
-        chat_history.append({"role": "system", "content": prompt})
+        already_has_system_prompt = any(msg["role"] == "system" for msg in chat_history)
+        if not already_has_system_prompt:
+            prompt = Template(system_prompt).render(**kwargs)  # pyright: ignore[reportAny]
+            chat_history.append({"role": "system", "content": prompt})
 
         if messages:
             chat_history.extend(
