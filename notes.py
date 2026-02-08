@@ -7,15 +7,24 @@ import click
 from dotenv import load_dotenv
 from openai import OpenAI
 
+from utils.bot import ConversationalBot
 from utils.config import get_notes_dir
 from utils.files import (
+    get_all_md_files_content,
     get_files_to_parse,
     get_files_with_text,
     search_files_with_keywords,
 )
-from utils.llm import GeminiLlm, LlmBase, parse_files
+from utils.llm import GeminiLlm, LlmBase, Message, parse_files
 
 load_dotenv()
+
+WELCOME_MESSAGE = """
+    == NOTARIUM == 
+
+Notarium is a Generative AI bot with context about your notes.
+    """
+
 
 logger = logging.getLogger(__name__)
 
@@ -62,6 +71,35 @@ def sync_notes():
     llm = GeminiLlm(client)
 
     click.echo(_sync_notes(llm=llm, notes_dir=notes_dir))
+
+
+@main.command("chat")
+def chat_with_model():
+    """Ask Notarium, a Generative AI bot, anything related to your notes."""
+    notes_dir = get_notes_dir()
+    client = OpenAI(
+        base_url=os.getenv("GEMINI_BASE_URL"), api_key=os.getenv("GEMINI_API_KEY")
+    )
+
+    llm = GeminiLlm(client)
+    click.echo(message=WELCOME_MESSAGE)
+
+    _chat_with_model(llm, notes_dir)
+
+
+def _chat_with_model(llm: LlmBase, notes_dir: Path) -> None:
+    bot = ConversationalBot(llm=llm)
+    notes_context = get_all_md_files_content(notes_dir)
+    bot.add_notes_context(notes_context)
+
+    while True:
+        prompt: str = click.prompt(text=click.style("Prompt", fg="green", bold=True))  # pyright: ignore[reportAny]
+        user_message = Message("user", prompt)
+        bot_message = bot.ask_model(user_message)
+
+        notarium_name = click.style("Notarium:", fg="cyan", bold=True)
+
+        click.echo(f"{notarium_name} {bot_message}\n")
 
 
 def _sync_notes(llm: LlmBase, notes_dir: Path) -> str:

@@ -23,7 +23,11 @@ class Message:
 
 class LlmBase(Protocol):
     def invoke(
-        self, query: str | None, messages: list[Message] | None, system_prompt: str = ""
+        self,
+        query: str | None,
+        messages: list[Message] | None,
+        system_prompt: str = "",
+        **kwargs,
     ) -> str: ...
 
 

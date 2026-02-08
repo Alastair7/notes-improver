@@ -3,6 +3,7 @@ from pathlib import Path
 from pytest import fixture
 
 from notes import _sync_notes
+from utils.llm import Message
 
 
 @fixture()
@@ -11,8 +12,14 @@ def init_data_folder(tmp_path: Path) -> Path:
 
 
 class FakeLlm:
-    def invoke(self, query: str, system_prompt: str = "", **kwargs) -> str:
-        return query
+    def invoke(
+        self,
+        query: str | None,
+        messages: list[Message] | None,
+        system_prompt: str = "",
+        **kwargs,
+    ) -> str:
+        return query or ""
 
 
 def test_sync_notes_should_return_no_items_to_parse_when_no_txt_files(

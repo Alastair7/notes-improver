@@ -1,3 +1,4 @@
+from utils.files import Note
 from utils.llm import LlmBase, Message
 
 
@@ -5,6 +6,7 @@ class ConversationalBot:
     def __init__(self, llm: LlmBase):
         self._chat_history: list[Message] = []
         self._llm: LlmBase = llm
+        self._context: list[Note] = []
 
     def ask_model(self, message: Message) -> str:
         """Send a message to the LLM. It also updates the chat history internally."""
@@ -15,14 +17,16 @@ class ConversationalBot:
         self._add_message_to_chat_history(message=message)
 
         model_response = self._llm.invoke(
-            query=None,
-            messages=self._chat_history,
+            query=None, messages=self._chat_history, notes=self._context
         )
 
         model_message = self._build_model_response_message(model_response)
         self._add_message_to_chat_history(model_message)
 
         return model_response
+
+    def add_notes_context(self, notes: list[Note]):
+        self._context = notes
 
     def _build_model_response_message(self, response: str) -> Message:
         return Message(role="assistant", content=response)
