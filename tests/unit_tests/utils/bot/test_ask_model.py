@@ -1,4 +1,5 @@
 import pytest
+
 from utils.bot import ConversationalBot
 from utils.llm import Message
 
@@ -13,6 +14,7 @@ class FakeLlm:
         query: str | None,  # pyright: ignore[reportUnusedParameter]
         messages: list[Message] | None,  # pyright: ignore[reportUnusedParameter]
         system_prompt: str = "",  # pyright: ignore[reportUnusedParameter]
+        **kwargs,
     ):
         if not self.show_success:
             raise ValueError("Forced value error by test")

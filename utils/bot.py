@@ -6,7 +6,7 @@ class ConversationalBot:
     def __init__(self, llm: LlmBase):
         self._chat_history: list[Message] = []
         self._llm: LlmBase = llm
-        self._context: list[Note] = []
+        self.context: list[Note] = []
 
     def ask_model(self, message: Message) -> str:
         """Send a message to the LLM. It also updates the chat history internally."""
@@ -14,22 +14,19 @@ class ConversationalBot:
         if message.content.strip() == "":
             raise ValueError("Message must not be empty or whitespaced")
 
-        self._add_message_to_chat_history(message=message)
-
         model_response = self._llm.invoke(
-            query=None, messages=self._chat_history, notes=self._context
+            query=None, messages=self._chat_history, notes=self.context
         )
 
         model_message = self._build_model_response_message(model_response)
-        self._add_message_to_chat_history(model_message)
+
+        self._chat_history.append(message)
+        self._chat_history.append(model_message)
 
         return model_response
 
     def add_notes_context(self, notes: list[Note]):
-        self._context = notes
+        self.context = notes
 
     def _build_model_response_message(self, response: str) -> Message:
         return Message(role="assistant", content=response)
-
-    def _add_message_to_chat_history(self, message: Message) -> None:
-        self._chat_history.append(message)
