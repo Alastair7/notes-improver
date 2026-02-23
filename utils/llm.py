@@ -1,3 +1,4 @@
+import json
 import logging
 from dataclasses import dataclass
 from pathlib import Path
@@ -7,7 +8,10 @@ from jinja2 import Template
 from openai import OpenAI
 from openai.types.chat import (
     ChatCompletionMessageParam,
+    ChatCompletionMessageToolCall,
 )
+
+from tools import TOOL_REGISTRY, TOOLS
 
 logger = logging.getLogger(__name__)
 
@@ -61,15 +65,43 @@ class GeminiLlm:
         elif query:
             chat_history.append({"role": "user", "content": query})
 
-        response = self.client.chat.completions.create(
-            model="gemini-2.5-flash",
-            messages=cast(list[ChatCompletionMessageParam], chat_history),
-        )
+        while True:
+            response = self.client.chat.completions.create(
+                model="gemini-2.5-flash",
+                messages=cast(list[ChatCompletionMessageParam], chat_history),
+                tools=TOOLS,
+                tool_choice="auto",
+            )
 
-        logger.debug("Chat history: %s", chat_history)
-        logger.debug("LLM response: %s", response.choices[0].message.content)
+            msg = response.choices[0].message
 
-        return response.choices[0].message.content or ""
+            if not msg.tool_calls:
+                return msg.content or ""
+
+            for call in msg.tool_calls:
+                tool_call = cast(ChatCompletionMessageToolCall, call)
+                name = tool_call.function.name
+                args = json.loads(tool_call.function.arguments)
+
+                invoke_tool = TOOL_REGISTRY.get(name)
+
+                if not invoke_tool:
+                    raise RuntimeError(f"Unknown tool: {name}")
+
+                try:
+                    result = invoke_tool(**args)
+                    content = json.dumps(result)
+                except Exception as e:
+                    content = json.dumps({"error": e})
+
+                chat_history.append(
+                    {"role": "tool", "tool_call_id": tool_call.id, "content": content}
+                )
+
+            logger.debug("Chat history: %s", chat_history)
+            logger.debug("LLM response: %s", response.choices[0].message.content)
+
+            return response.choices[0].message.content or ""
 
 
 def parse_files(llm: LlmBase, files_to_parse: list[Path]):

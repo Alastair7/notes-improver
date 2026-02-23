@@ -42,8 +42,8 @@ Contenido
     - [x] Añadir chat history
 - [x] Chat bot en vivo desde la terminal con un modelo.
 - [x] Concepto de comandos: salir de la aplicación.
-- [ ] Crear una tool para leer las notas.
-- [ ] Crear tool para saber cuántas notas hay.
+- [x] Crear una tool para leer las notas.
+- [x] Crear tool para saber cuántas notas hay.
 - [ ] Usar modelo para generar contenido en las notas en base a prompts.
     - [ ] Crear una tool custom para generar contenido nuevo a partir de un prompt.
 - [ ] Persistencia de datos: SQLite.

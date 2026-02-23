@@ -99,7 +99,6 @@ def _chat_with_model(llm: LlmBase, notes_dir: Path) -> None:
 
         if user_message.content.startswith("-quit"):
             click.echo(f"{system_style} exited by user.")
-
             break
         bot_message = bot.ask_model(user_message)
 

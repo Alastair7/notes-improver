@@ -14,13 +14,13 @@ class ConversationalBot:
         if message.content.strip() == "":
             raise ValueError("Message must not be empty or whitespaced")
 
+        self._chat_history.append(message)
         model_response = self._llm.invoke(
             query=None, messages=self._chat_history, notes=self.context
         )
 
         model_message = self._build_model_response_message(model_response)
 
-        self._chat_history.append(message)
         self._chat_history.append(model_message)
 
         return model_response
