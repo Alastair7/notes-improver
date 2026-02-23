@@ -41,7 +41,7 @@ Contenido
     - [x] Añadir sistema de logging
     - [x] Añadir chat history
 - [x] Chat bot en vivo desde la terminal con un modelo.
-- [ ] Concepto de comandos: salir de la aplicación.
+- [x] Concepto de comandos: salir de la aplicación.
 - [ ] Crear una tool para leer las notas.
 - [ ] Crear tool para saber cuántas notas hay.
 - [ ] Usar modelo para generar contenido en las notas en base a prompts.

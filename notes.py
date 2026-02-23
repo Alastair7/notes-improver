@@ -93,12 +93,17 @@ def _chat_with_model(llm: LlmBase, notes_dir: Path) -> None:
     bot.add_notes_context(notes_context)
 
     while True:
+        system_style = click.style("SYSTEM:", fg="yellow", bold=True)
         prompt: str = click.prompt(text=click.style("Prompt", fg="green", bold=True))  # pyright: ignore[reportAny]
         user_message = Message("user", prompt)
+
+        if user_message.content.startswith("-quit"):
+            click.echo(f"{system_style} exited by user.")
+
+            break
         bot_message = bot.ask_model(user_message)
 
         notarium_name = click.style("Notarium:", fg="cyan", bold=True)
-
         click.echo(f"{notarium_name} {bot_message}\n")
 
 
