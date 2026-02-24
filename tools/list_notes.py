@@ -1,6 +1,7 @@
 from typing import TypedDict
 
 from openai.types.chat import ChatCompletionToolParam
+
 from utils.config import get_notes_dir
 
 NOTES_DIR = get_notes_dir().resolve()

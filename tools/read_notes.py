@@ -5,7 +5,6 @@ from openai.types.chat import ChatCompletionToolParam
 from utils.config import get_notes_dir
 from utils.files import get_md_file_content
 
-
 NOTES_DIR = get_notes_dir().resolve()
 
 

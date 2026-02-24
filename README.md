@@ -44,22 +44,22 @@ Contenido
 - [x] Concepto de comandos: salir de la aplicación.
 - [x] Crear una tool para leer las notas.
 - [x] Crear tool para saber cuántas notas hay.
-- [ ] Usar modelo para generar contenido en las notas en base a prompts.
-    - [ ] Crear una tool custom para generar contenido nuevo a partir de un prompt.
+- [ ] Añadir openrouter para usar modelos gratis.
+- [ ] Crear una tool custom para generar contenido nuevo a partir de un prompt.
 - [ ] Persistencia de datos: SQLite.
+    - Guardar conversaciones.
 
 
 ## Propuestas
 
-- [] Usar notas como contexto para el LLM y poder hacer preguntas.
-- [] Chat bot en vivo desde la terminal con un modelo.
+- [x] Usar notas como contexto para el LLM y poder hacer preguntas.
+- [x] Chat bot en vivo desde la terminal con un modelo.
 - [] Usar modelo para generar contenido en las notas en base a prompts.
 - [] Generar un index.md como resumen de cada nota: fecha de creación, título y un resumen en 2 lineas.
 - [x] Búsqueda de notas por keyword: A partir de keywords, devolver las notas que los incluyan.
-- Notas temporales: Poder marcar una nota como temporal y que se borre al cabo de x tiempo.
 - [x] Shortcut para invocar el programa para acceder rápidamente a las notas.
-- [] Encriptación de notas.
 - [] Comando `notes info` para obtener información sobre las notas existentes (nº total de notas, fecha de creación de cada nota, fecha de actualización...)
 
 ## Pendientes a decidir
 
+https://openrouter.ai/openrouter/free
