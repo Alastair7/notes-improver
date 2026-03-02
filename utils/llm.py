@@ -36,7 +36,7 @@ class LlmBase(Protocol):
 
 
 @dataclass()
-class GeminiLlm:
+class OpenRouterLLM:
     client: OpenAI
 
     def invoke(
@@ -65,23 +65,25 @@ class GeminiLlm:
         elif query:
             chat_history.append({"role": "user", "content": query})
 
-        while True:
-            response = self.client.chat.completions.create(
-                model="gemini-2.5-flash",
-                messages=cast(list[ChatCompletionMessageParam], chat_history),
-                tools=TOOLS,
-                tool_choice="auto",
-            )
+        response = self.client.chat.completions.create(
+            model="openrouter/free",
+            messages=cast(list[ChatCompletionMessageParam], chat_history),
+            tools=TOOLS,
+            tool_choice="auto",
+        )
 
-            msg = response.choices[0].message
+        msg = response.choices[0].message
 
-            if not msg.tool_calls:
-                return msg.content or ""
-
+        if msg.tool_calls:
             for call in msg.tool_calls:
                 tool_call = cast(ChatCompletionMessageToolCall, call)
                 name = tool_call.function.name
-                args = json.loads(tool_call.function.arguments)
+
+                try:
+                    print("TOOL ARGUMENTS", tool_call.function.arguments)
+                    args = json.loads(tool_call.function.arguments)
+                except json.JSONDecodeError as e:
+                    raise ValueError(f"Tool returned invalid JSON: {e}")
 
                 invoke_tool = TOOL_REGISTRY.get(name)
 
@@ -101,12 +103,11 @@ class GeminiLlm:
             logger.debug("Chat history: %s", chat_history)
             logger.debug("LLM response: %s", response.choices[0].message.content)
 
-            return response.choices[0].message.content or ""
+        return msg.content or ""
 
 
 def parse_files(llm: LlmBase, files_to_parse: list[Path]):
     for file in files_to_parse:
-        print("Parsing file:", file.name)
         logger.info("Parsing file: %s", file.name)
         raw_content = file.read_text(encoding="utf-8")
 

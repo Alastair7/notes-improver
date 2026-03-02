@@ -44,8 +44,8 @@ Contenido
 - [x] Concepto de comandos: salir de la aplicación.
 - [x] Crear una tool para leer las notas.
 - [x] Crear tool para saber cuántas notas hay.
-- [ ] Añadir openrouter para usar modelos gratis.
-- [ ] Crear una tool custom para generar contenido nuevo a partir de un prompt.
+- [x] Añadir openrouter para usar modelos gratis.
+- [x] Crear una tool custom para generar contenido nuevo a partir de un prompt.
 - [ ] Persistencia de datos: SQLite.
     - Guardar conversaciones.
 
@@ -62,4 +62,3 @@ Contenido
 
 ## Pendientes a decidir
 
-https://openrouter.ai/openrouter/free

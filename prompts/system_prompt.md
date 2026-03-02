@@ -29,6 +29,20 @@ Use this tool when the user request the content of a note or notes.
 Use this tool to get the number of notes, their filenames or both.
 **Always** use this tool to get the current available notes filenames.
 
+### generateNewNote
+
+Use this tool to generate new notes when user request it.
+<examples>
+ <example>Can you create a note about AI?</example>
+ <example>Create a note about wolves.</example>
+</examples>
+
+**Instructions for the tool:**
+- Pass the note as JSON with two properties: `note` and `path`.
+- `note` must contain `title`, `description`, `keywords`, `text`.
+- `path` is just the filename ending in `.md` (e.g., `docker_guidelines.md`).
+- Do **not** return the JSON to the user.
+
 ## Protocols
 
 You can use these guidelines to handle some of the scenarios that may happen.

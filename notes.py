@@ -15,7 +15,7 @@ from utils.files import (
     get_files_with_text,
     search_files_with_keywords,
 )
-from utils.llm import GeminiLlm, LlmBase, Message, parse_files
+from utils.llm import OpenRouterLLM, LlmBase, Message, parse_files
 
 load_dotenv()
 
@@ -66,9 +66,10 @@ def sync_notes():
     notes_dir = get_notes_dir()
     logger.info("Starting notes syncing for path: %s", notes_dir)
     client = OpenAI(
-        base_url=os.getenv("GEMINI_BASE_URL"), api_key=os.getenv("GEMINI_API_KEY")
+        base_url=os.getenv("OPENROUTER_BASE_URL"),
+        api_key=os.getenv("OPENROUTER_API_KEY"),
     )
-    llm = GeminiLlm(client)
+    llm = OpenRouterLLM(client)
 
     click.echo(_sync_notes(llm=llm, notes_dir=notes_dir))
 
@@ -78,10 +79,11 @@ def chat_with_model():
     """Ask Notarium, a Generative AI bot, anything related to your notes."""
     notes_dir = get_notes_dir()
     client = OpenAI(
-        base_url=os.getenv("GEMINI_BASE_URL"), api_key=os.getenv("GEMINI_API_KEY")
+        base_url=os.getenv("OPENROUTER_BASE_URL"),
+        api_key=os.getenv("OPENROUTER_API_KEY"),
     )
 
-    llm = GeminiLlm(client)
+    llm = OpenRouterLLM(client)
     click.echo(message=WELCOME_MESSAGE)
 
     _chat_with_model(llm, notes_dir)
